@@ -10,7 +10,7 @@ class Command(BaseCommand):
         books = [
             ('Clean Code', 'Robert C. Martin', '978-0132350884', 'ING', 2008, 4),
             ('Design Patterns', 'Erich Gamma et al.', '978-0201633610', 'ING', 1994, 2),
-            ('Cien Anos de Soledad', 'Gabriel Garcia Marquez', '978-0307474728', 'LIT', 1967, 5),
+            ('Cien Años de Soledad', 'Gabriel Garcia Marquez', '978-0307474728', 'LIT', 1967, 5),
             ('Introduction to Algorithms', 'Thomas H. Cormen', '978-0262033848', 'CIEN', 2009, 3),
             ('Breve Historia del Tiempo', 'Stephen Hawking', '978-8497596725', 'CIEN', 1988, 6),
         ]
