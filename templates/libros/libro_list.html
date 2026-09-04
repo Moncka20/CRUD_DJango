@@ -1,16 +1,63 @@
 {% extends 'libros/base.html' %}
+
 {% block title %}Libros | Biblioteca Academica{% endblock %}
+
 {% block content %}
 <section class="hero rounded-3 p-4 p-md-5 mb-4">
   <div class="d-flex flex-column flex-md-row justify-content-between gap-3 align-items-md-center">
-    <div><p class="text-warning mb-1 fw-semibold">CATALOGO ACADEMICO</p><h1 class="display-6 fw-bold mb-2">Libros disponibles</h1><p class="mb-0 opacity-75">Consulta y administra el inventario de la biblioteca.</p></div>
-    <div class="text-md-end"><span class="display-5 fw-bold">{{ libros|length }}</span><br><small class="opacity-75">registros</small></div>
+    <div>
+      <p class="text-warning mb-1 fw-semibold">CATALOGO ACADEMICO</p>
+      <h1 class="display-6 fw-bold mb-2">Libros disponibles</h1>
+      <p class="mb-0 opacity-75">Consulta y administra el inventario de la biblioteca.</p>
+    </div>
+    <div class="text-md-end">
+      <span class="display-5 fw-bold">{{ libros|length }}</span><br>
+      <small class="opacity-75">registros</small>
+    </div>
   </div>
 </section>
+
 <div class="card overflow-hidden">
-  <div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th>Libro</th><th>ISBN</th><th>Categoria</th><th>Publicacion</th><th>Stock</th><th class="text-end">Acciones</th></tr></thead><tbody>
-  {% for libro in libros %}<tr><td><strong>{{ libro.titulo }}</strong><br><small class="text-muted">{{ libro.autor }}</small></td><td>{{ libro.isbn }}</td><td><span class="badge text-bg-light">{{ libro.get_categoria_display }}</span></td><td>{{ libro.año_publicacion }}</td><td><span class="badge {% if libro.cantidad_disponible > 0 %}text-bg-success{% else %}text-bg-danger{% endif %}">{{ libro.cantidad_disponible }}</span></td><td class="text-end text-nowrap"><a class="btn btn-sm btn-outline-primary" href="{% url 'libros:detalle' libro.pk %}">Ver</a> <a class="btn btn-sm btn-outline-secondary" href="{% url 'libros:editar' libro.pk %}">Editar</a> <a class="btn btn-sm btn-outline-danger" href="{% url 'libros:eliminar' libro.pk %}">Eliminar</a></td></tr>
-  {% empty %}<tr><td colspan="6" class="text-center py-5 text-muted">No hay libros registrados.</td></tr>{% endfor %}
-  </tbody></table></div>
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
+        <tr>
+          <th>Libro</th>
+          <th>ISBN</th>
+          <th>Categoria</th>
+          <th>Publicacion</th>
+          <th>Stock</th>
+          <th class="text-end">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for libro in libros %}
+          <tr>
+            <td>
+              <strong>{{ libro.titulo }}</strong><br>
+              <small class="text-muted">{{ libro.autor }}</small>
+            </td>
+            <td>{{ libro.isbn }}</td>
+            <td><span class="badge text-bg-light">{{ libro.get_categoria_display }}</span></td>
+            <td>{{ libro.año_publicacion }}</td>
+            <td>
+              <span class="badge {% if libro.cantidad_disponible > 0 %}text-bg-success{% else %}text-bg-danger{% endif %}">
+                {{ libro.cantidad_disponible }}
+              </span>
+            </td>
+            <td class="text-end text-nowrap">
+              <a class="btn btn-sm btn-outline-primary" href="{% url 'libros:detalle' libro.pk %}">Ver</a>
+              <a class="btn btn-sm btn-outline-secondary" href="{% url 'libros:editar' libro.pk %}">Editar</a>
+              <a class="btn btn-sm btn-outline-danger" href="{% url 'libros:eliminar' libro.pk %}">Eliminar</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="6" class="text-center py-5 text-muted">No hay libros registrados.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}
